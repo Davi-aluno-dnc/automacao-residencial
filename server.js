@@ -1,27 +1,18 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+require("dotenv").config();
 const app = express();
-const PORT = 3000;
+
+app.use(bodyParser.json());
+const api = require("./rotas/");
+app.use("/api", api);
+const PORT = process.env.PORT;
+
+console.log(process.env.MONGO_PASS);
 
 app.get("/", (req, res) => {
   res.json({
     success: true,
-  });
-});
-
-app.get("/devices", (req, res) => {
-  const devices = [
-    {
-      id: 123,
-      nome: "Geladeira",
-      kwh: 23,
-      corrente: 2.1,
-      voltagem: 127,
-      fp: 1,
-    },
-  ];
-  res.json({
-    success: true,
-    devices: devices,
   });
 });
 
